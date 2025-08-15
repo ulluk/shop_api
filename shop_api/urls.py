@@ -16,7 +16,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from product.views import category_list_create_api_view, category_detail_api_view , product_detail_api_view, product_list_create_api_view, review_detail_api_view,review_list_api_view, review_of_product_api_view
+from product.views import (category_list_create_api_view, category_detail_api_view , product_detail_api_view, 
+                           product_list_create_api_view, review_detail_api_view,review_list_api_view, review_of_product_api_view,)
+from users.views import (registration_api_view, authorization_api_view, confirmation_api_view)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -27,4 +29,7 @@ urlpatterns = [
     path('api/v1/reviews', review_list_api_view),
     path('api/v1/reviews/<int:id>', review_detail_api_view),
     path('api/v1/products/reviews', review_of_product_api_view),
+    path('api/v1/users/registration/', registration_api_view),
+    path('api/v1/users/authorization/', authorization_api_view),
+    path('api/v1/users/confirm/', confirmation_api_view)
 ]
