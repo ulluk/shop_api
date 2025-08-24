@@ -21,10 +21,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('SECRET')
+SECRET_KEY = os.environ.get('SECRET_KEY', 'fallback_secret')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get('DEBUG')
+DEBUG = os.environ.get('DEBUG', 'off').lower() in ['on', 'true', '1']
 
 ALLOWED_HOSTS = []
 
@@ -86,11 +86,11 @@ WSGI_APPLICATION = 'shop_api.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.environ.get('NAME_DB'),
-        'USER': os.environ.get('USER_DB'),
-        'PASSWORD': os.environ.get('PASSWORD_DB'),
-        'HOST': os.environ.get('HOST_DB'),
-        'PORT': os.environ.get('PORT_DB'),
+        'NAME': os.getenv('NAME_DB', 'database_shop_kg'),
+        'USER': os.getenv('USER_DB', 'database_shop_user'),
+        'PASSWORD': os.getenv('PASSWORD_DB', '1234'),
+        'HOST': os.getenv('HOST_DB', 'shop_data'),
+        'PORT': os.getenv('PORT_BD', '5432'),
     }
 }
 

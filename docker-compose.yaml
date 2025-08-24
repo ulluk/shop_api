@@ -1,0 +1,28 @@
+version: '3'
+services: 
+  cinematica_api: 
+    build:
+      context: .
+    command: sh -c "python manage.py runserver 0.0.0.0:8000"
+    ports:
+      - "8000:8000"
+    depends_on:
+      - shop_data
+    environment:
+      POSTGRES_DB: "database_shop_kg"
+      POSTGRES_USER: "database_shop_user"
+      POSTGRES_PASSWORD: "1234"
+      DB_HOST: "shop_data"
+      DB_PORT: "5432"
+
+  cinematica_data:
+    image: "postgres:14"
+    environment:
+      POSTGRES_DB: "database_shop_kg"
+      POSTGRES_USER: "database_shop_user"
+      POSTGRES_PASSWORD: "1234"
+    volumes:
+      - "cinematica_database:/var/lib/postgresql/data"
+
+volumes:
+  cinematica_database:
